@@ -8,6 +8,8 @@
 import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Alert,
+  Linking,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -25,13 +27,13 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { MyViews } from './src/components/views';
-import { MyTexts } from './src/components/texts';
-import { MyTextInputs } from './src/components/textInputs';
-import { MyPressables } from './src/components/pressables';
-import { MyScrollViews } from './src/components/scrollViews';
+import {MyViews} from './src/components/views';
+import {MyTexts} from './src/components/texts';
+import {MyTextInputs} from './src/components/textInputs';
+import {MyPressables} from './src/components/pressables';
+import {MyScrollViews} from './src/components/scrollViews';
 import FoodList from './src/components/foodList';
-import { MyFashionScrollList } from './src/components/fashionList';
+import {MyFashionScrollList} from './src/components/fashionList';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -70,7 +72,21 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const [state, setState] = useState('');
+  const postPic = require('./src/assets/images/cat.jpg');
 
+  const showAlert = (videoUrl: string, title: string) => {
+    Alert.alert(title, 'Do you want to see a video with cute cats?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'YES',
+        onPress: () => Linking.openURL(videoUrl),
+      },
+    ]);
+  };
   return (
     //ex1
     // <View style={styles.flag}>
@@ -126,14 +142,23 @@ function App(): JSX.Element {
     //     {/* <View style={styles.circle1} >
     //         <Text style={{color: 'white'}}>Hello</Text>
     //     </View> */}
-        
 
     //     {/* <View style={{width:30, height:30, backgroundColor: 'pink', transform: [{rotate: '45deg'}]}}></View>
     //     <View style={styles.circle2} /> */}
     //   </View>
-      
+
     // </View>
-    <MyFashionScrollList/>
+    //  <MyFashionScrollList/>
+    <MyPressables
+      post={{
+        imageUri: postPic,
+        userName: 'stefi123',
+        description: 'my cute cat <3',
+        videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
+        titleAlert: 'You clicked the picture',
+      }}
+      onPress={showAlert}
+    />
   );
 }
 
