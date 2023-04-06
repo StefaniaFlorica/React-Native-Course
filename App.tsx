@@ -9,7 +9,10 @@ import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   Alert,
+  FlatList,
   Linking,
+  ListRenderItemInfo,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -34,6 +37,8 @@ import {MyPressables} from './src/components/pressables';
 import {MyScrollViews} from './src/components/scrollViews';
 import FoodList from './src/components/foodList';
 import {MyFashionScrollList} from './src/components/fashionList';
+import {PostInterface} from './src/types/postInterface';
+import {MathButton} from './src/components/buttons';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -73,6 +78,58 @@ function App(): JSX.Element {
   };
   const [state, setState] = useState('');
   const postPic = require('./src/assets/images/cat.jpg');
+  const dressPic = require('./src/assets/images/midi.png');
+  const jeansPic = require('./src/assets/images/mom.png');
+  const hoodiePic = require('./src/assets/images/hoodie.png');
+  const profilePic4 = require('./src/assets/images/seara.png');
+  const profilePic1 = require('./src/assets/images/heart.png');
+  const profilePic2 = require('./src/assets/images/profile.jpg');
+  const profilePic3 = require('./src/assets/images/skinny.png');
+
+  const [sum, setSum] = useState(0);
+
+  //   export interface PostInterface{
+  //     imageUri: number,
+  //     userName: string,
+  //     description: string,
+  //     videoUrl: string,
+  //     titleAlert: "You clicked the picture"
+  // }
+
+  const data: PostInterface[] = [
+    {
+      imageUri: postPic,
+      profilePic: profilePic4,
+      userName: 'stefi123',
+      description: 'my cute cat <3',
+      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
+      titleAlert: 'You clicked the picture',
+    },
+    {
+      imageUri: dressPic,
+      profilePic: profilePic1,
+      userName: 'user1',
+      description: 'description1',
+      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
+      titleAlert: 'You clicked the picture',
+    },
+    {
+      imageUri: jeansPic,
+      profilePic: profilePic2,
+      userName: 'user2',
+      description: 'description2',
+      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
+      titleAlert: 'You clicked the picture',
+    },
+    {
+      imageUri: hoodiePic,
+      profilePic: profilePic3,
+      userName: 'user3',
+      description: 'description3',
+      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
+      titleAlert: 'You clicked the picture',
+    },
+  ];
 
   const showAlert = (videoUrl: string, title: string) => {
     Alert.alert(title, 'Do you want to see a video with cute cats?', [
@@ -87,6 +144,17 @@ function App(): JSX.Element {
       },
     ]);
   };
+
+  const onPressButton = (value: number) => {
+    setSum(sum + value);
+  };
+
+  const reset = () => setSum(0);
+
+  const renderItem = ({item}: ListRenderItemInfo<PostInterface>) => (
+    <MyPressables post={item} onPress={showAlert} />
+  );
+
   return (
     //ex1
     // <View style={styles.flag}>
@@ -149,20 +217,103 @@ function App(): JSX.Element {
 
     // </View>
     //  <MyFashionScrollList/>
-    <MyPressables
-      post={{
-        imageUri: postPic,
-        userName: 'stefi123',
-        description: 'my cute cat <3',
-        videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
-        titleAlert: 'You clicked the picture',
-      }}
-      onPress={showAlert}
-    />
+    // <MyPressables
+    //   post={{
+    //     imageUri: postPic,
+    //     userName: 'stefi123',
+    //     description: 'my cute cat <3',
+    //     videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
+    //     titleAlert: 'You clicked the picture',
+    //   }}
+    //   onPress={showAlert}
+    // />
+    // <FlatList
+    //   data = {data}
+    //   renderItem = {renderItem}
+    //   keyExtractor = {(item:PostInterface) => item.userName}
+    //   ListEmptyComponent={
+    //     <View style={styles.empty}>
+    //       <Text>Data is empty</Text>
+    //     </View>}
+    //   ListHeaderComponent={(
+    //     <View style = {styles.header}>
+    //     </View>
+    //   )
+    //   }
+    //   ListFooterComponent={(
+    //     <View style = {styles.footer}>
+    //       <Text>
+    //         Footer
+    //       </Text>
+    //     </View>
+    //   )
+    //   }
+    //   ItemSeparatorComponent={() => (
+    //     <View style={styles.separator}>
+    //     </View>
+    //   )}
+
+    //  />
+    <View style={styles.main2}>
+      <View style={styles.buttonRow}>
+        <MathButton value={-1} onPress={onPressButton}></MathButton>
+        <MathButton value={1} onPress={onPressButton}></MathButton>
+      </View>
+      <View>
+        <Text>{sum}</Text>
+      </View>
+      <View style={styles.buttonRow}>
+        <MathButton value={-2} onPress={onPressButton}></MathButton>
+        <MathButton value={2} onPress={onPressButton}></MathButton>
+      </View>
+      <Pressable style={styles.reset} onPress={reset}>
+        <Text>Reset</Text>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  reset: {
+    width: 60,
+    height: 60,
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+  },
+  main2: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  separator: {
+    height: 25,
+    backgroundColor: 'lightyellow',
+  },
+  header: {
+    height: 50,
+    backgroundColor: 'pink',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  footer: {
+    height: 50,
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  empty: {
+    marginTop: 400,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,

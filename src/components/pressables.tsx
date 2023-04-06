@@ -19,7 +19,6 @@ export const MyPressables = (props: Props) => {
   const [title, setTitle] = useState('ORIGINAL TITLE');
   const [likePressed, setLikePressed] = useState(false);
   const [likeTitle, setLikeTitle] = useState({id: 1, title: 'Like'});
-  const profilePic = require('../assets/images/profile.jpg');
   const postPic = require('../assets/images/cat.jpg');
   const likeIcon = require('../assets/images/heart-outline.png');
   const commentIcon = require('../assets/images/comment.png');
@@ -65,7 +64,7 @@ export const MyPressables = (props: Props) => {
       <View style={styles.card_container}>
         <View style={styles.top_view}>
           <Pressable onPress={changeTitle}>
-            <Image source={profilePic} style={styles.profile_pic}></Image>
+            <Image source={props.post.profilePic} style={styles.profile_pic}></Image>
           </Pressable>
           <Text style={styles.text}>{props.post.userName}</Text>
           <Text style={styles.title}>{title}</Text>
@@ -147,13 +146,15 @@ const styles = StyleSheet.create({
   },
   post_pic: {
     width: 300,
-    height: 300,
+    height: 298,
   },
   top_view: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    borderTopWidth: 1,
+    borderTopColor: 'grey',
   },
   center_view: {
     flex: 8.3,
@@ -178,23 +179,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card_container: {
-    width: 300,
+    width: 400,
     height: 400,
     backgroundColor: 'white',
     borderRadius: 40,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.44,
-    shadowRadius: 10.32,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 8,
+    // },
+    // shadowOpacity: 0.44,
+    // shadowRadius: 10.32,
 
-    elevation: 16,
+    // elevation: 16,
   },
   main_container: {
     width: '100%',
-    height: '100%',
+    // height: '100%',
     backgroundColor: 'white',
     flexDirection: 'column',
     alignItems: 'center',
