@@ -31,8 +31,8 @@ export const PasswordInput = (props: Props) => {
         <TextInput
           //   placeholder="password"
           //   placeholderTextColor="#FFDFD3"
-          secureTextEntry={isVisible ? false : true}
-          caretHidden={true}
+          secureTextEntry={!isVisible}
+          // caretHidden={true}
           onChangeText={value => props.onChangeText(value)}
           style={{flex: 4, color: '#957DAD'}}></TextInput>
         <Pressable
@@ -64,12 +64,10 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    paddingLeft:10,
-    width: 200,
+    paddingLeft: 10,
+    width: 250,
     height: 50,
-    backgroundColor:'#F5F5F5',
-    // borderWidth: 2,
-    // borderColor: '#D291BC',
+    backgroundColor: '#F5F5F5',
     borderRadius: 30,
   },
 });

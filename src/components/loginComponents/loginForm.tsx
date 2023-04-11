@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import {Alert,StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {EmailInput} from './emailInput';
 import {PasswordInput} from './passwordInput';
 import {LoginButton} from './loginButton';
 
-export const LoginForm = () => {
+interface Props {
+  onLoginPress: () => void;
+}
+
+export const LoginForm = (props: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,30 +22,31 @@ export const LoginForm = () => {
   };
 
   const onButtonPress = () => {
-    Alert.alert(
-      'You credentials',
-      `${email}\n${password}\nDo you want to continue?`,
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'YES',
-          onPress: () => console.log('Yes Pressed'),
-        },
-      ],
-    );
+    // Alert.alert(
+    //   'You credentials',
+    //   `${email}\n${password}\nDo you want to continue?`,
+    //   [
+    //     {
+    //       text: 'Cancel',
+    //       onPress: () => console.log('Cancel Pressed'),
+    //       style: 'cancel',
+    //     },
+    //     {
+    //       text: 'YES',
+    //       onPress: () => console.log('Yes Pressed'),
+    //     },
+    //   ],
+    // );
+    props.onLoginPress();
   };
 
   return (
     <View style={styles.main}>
       <View style={styles.title}>
-        <Text style={styles.text}>Welcome!</Text>
+        <Text style={styles.text}>Hi there!</Text>
       </View>
       {/* <View style={styles.container}> */}
-      <View style={styles.card2}  >
+      <View style={styles.card2}>
         <EmailInput onChangeText={emailChange}></EmailInput>
         <PasswordInput onChangeText={passwordChange}></PasswordInput>
         <LoginButton onPress={onButtonPress}></LoginButton>
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card2: {
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     backgroundColor: 'white',
     width: '100%',
     height: '100%',

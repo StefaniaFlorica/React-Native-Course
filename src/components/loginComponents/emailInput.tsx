@@ -30,7 +30,7 @@ export const EmailInput = (props: Props) => {
         // placeholderTextColor="#FFDFD3"
         keyboardType="email-address"
         style={styles.input}
-        caretHidden={true}
+        // caretHidden={true}
         onChangeText={(value) => handleChange(value)}
         ></TextInput>
         {(error!=="" && <Text style={{color: '#957DAD'}}>{error}</Text>)}
@@ -53,11 +53,12 @@ const styles = StyleSheet.create({
 
   input: {
     padding: 10,
-    width: 200,
+    width: 250,
     height: 50,
     // borderWidth: 2,
     // borderColor: '#D291BC',
     borderRadius: 30,
-    backgroundColor:'#F5F5F5'
+    backgroundColor:'#F5F5F5',
+    color:'#957DAD'
   },
 });

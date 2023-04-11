@@ -44,10 +44,10 @@ export const MovieList = () => {
 
   const onLikePress = (isLikePressed: boolean) => {
     if (isLikePressed) {
-      setLikeNumber(likeNumber - 1);
-    } else {
-      setLikeNumber(likeNumber + 1);
-    }
+       return setLikeNumber(likeNumber - 1);
+    } 
+      return setLikeNumber(likeNumber + 1);
+    
   };
   const renderItem = ({item}: ListRenderItemInfo<MovieCardIf>) => (
     <MovieListItem data={item} onPress={onLikePress}></MovieListItem>

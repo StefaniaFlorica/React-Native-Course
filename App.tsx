@@ -4,90 +4,23 @@
  *
  * @format
  */
-
+import {NavigationContainer} from '@react-navigation/native'
 import React, {useState} from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  Alert,
-  FlatList,
-  Linking,
-  ListRenderItemInfo,
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {MyViews} from './src/components/views';
-import {MyTexts} from './src/components/texts';
-import {MyTextInputs} from './src/components/textInputs';
-import {MyPressables} from './src/components/pressables';
-import {MyScrollViews} from './src/components/scrollViews';
-import FoodList from './src/components/foodList';
-import {MyFashionScrollList} from './src/components/fashionList';
-import {PostInterface} from './src/types/postInterface';
 import { LoginForm } from './src/components/loginComponents/loginForm';
 import { MovieList } from './src/components/movieListComponents/movieList';
-import { CalculatorButtons } from './src/components/mathButtonsComponent';
-import { PostFlatList } from './src/components/postFlatList';
+import { AppNavigator } from './src/navigation/navigators/app-navigator';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-  const [state, setState] = useState('');
-
-
-  
-  return (
-
-<LoginForm></LoginForm>
-  
-  );
+  <NavigationContainer>
+    <AppNavigator/>
+  </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
