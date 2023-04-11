@@ -38,7 +38,10 @@ import {MyScrollViews} from './src/components/scrollViews';
 import FoodList from './src/components/foodList';
 import {MyFashionScrollList} from './src/components/fashionList';
 import {PostInterface} from './src/types/postInterface';
-import {MathButton} from './src/components/buttons';
+import { LoginForm } from './src/components/loginComponents/loginForm';
+import { MovieList } from './src/components/movieListComponents/movieList';
+import { CalculatorButtons } from './src/components/mathButtonsComponent';
+import { PostFlatList } from './src/components/postFlatList';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -77,199 +80,13 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const [state, setState] = useState('');
-  const postPic = require('./src/assets/images/cat.jpg');
-  const dressPic = require('./src/assets/images/midi.png');
-  const jeansPic = require('./src/assets/images/mom.png');
-  const hoodiePic = require('./src/assets/images/hoodie.png');
-  const profilePic4 = require('./src/assets/images/seara.png');
-  const profilePic1 = require('./src/assets/images/heart.png');
-  const profilePic2 = require('./src/assets/images/profile.jpg');
-  const profilePic3 = require('./src/assets/images/skinny.png');
 
-  const [sum, setSum] = useState(0);
 
-  //   export interface PostInterface{
-  //     imageUri: number,
-  //     userName: string,
-  //     description: string,
-  //     videoUrl: string,
-  //     titleAlert: "You clicked the picture"
-  // }
-
-  const data: PostInterface[] = [
-    {
-      imageUri: postPic,
-      profilePic: profilePic4,
-      userName: 'stefi123',
-      description: 'my cute cat <3',
-      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
-      titleAlert: 'You clicked the picture',
-    },
-    {
-      imageUri: dressPic,
-      profilePic: profilePic1,
-      userName: 'user1',
-      description: 'description1',
-      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
-      titleAlert: 'You clicked the picture',
-    },
-    {
-      imageUri: jeansPic,
-      profilePic: profilePic2,
-      userName: 'user2',
-      description: 'description2',
-      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
-      titleAlert: 'You clicked the picture',
-    },
-    {
-      imageUri: hoodiePic,
-      profilePic: profilePic3,
-      userName: 'user3',
-      description: 'description3',
-      videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
-      titleAlert: 'You clicked the picture',
-    },
-  ];
-
-  const showAlert = (videoUrl: string, title: string) => {
-    Alert.alert(title, 'Do you want to see a video with cute cats?', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {
-        text: 'YES',
-        onPress: () => Linking.openURL(videoUrl),
-      },
-    ]);
-  };
-
-  const onPressButton = (value: number) => {
-    setSum(sum + value);
-  };
-
-  const reset = () => setSum(0);
-
-  const renderItem = ({item}: ListRenderItemInfo<PostInterface>) => (
-    <MyPressables post={item} onPress={showAlert} />
-  );
-
+  
   return (
-    //ex1
-    // <View style={styles.flag}>
-    //   <View style={styles.blue}>
 
-    //   </View>
-    //   <View style={styles.yellow}>
-
-    //   </View>
-    //   <View style={styles.red}>
-
-    //   </View>
-    // </View>
-
-    //ex2
-    // <View
-    //   style={{
-    //     width: '100%',
-    //     height: '100%',
-    //     flexDirection: 'column',
-    //     justifyContent: 'space-evenly',
-    //     alignItems: 'center',
-    //   }}>
-    //   <View style={styles.square1}></View>
-
-    //   <View style={styles.square2}></View>
-    // </View>
-
-    // <View style={styles.main}>
-    //   <View style={{flexDirection: 'row'}}>
-    //     <View style={styles.circle1} />
-    //     <View style={styles.circle2} />
-    //   </View>
-    //   <View style={{flexDirection: 'column'}}>
-    //     <View style={styles.circle1} />
-    //     <View style={styles.circle2} />
-    //   </View>
-    // </View>
-
-    // <View style={{alignItems: 'center', justifyContent: 'center'}}>
-    //   <View style={{marginTop: 20,marginBottom: 20, width:30, height:30, backgroundColor: 'pink', transform: [{rotate: '45deg'}]}}></View>
-    //   {/* <View style={{width:30, height:30, backgroundColor: 'pink', transform: [{rotate: '45deg'}]}}></View> */}
-    // </View>
-    // <View
-    //   style={{
-    //     width: '100%',
-    //     height: '100%',
-    //     backgroundColor: 'white',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //   }}>
-    //   <View style={styles.shadow}>
-    //     {/* <View style={styles.circle1} >
-    //         <Text style={{color: 'white'}}>Hello</Text>
-    //     </View> */}
-
-    //     {/* <View style={{width:30, height:30, backgroundColor: 'pink', transform: [{rotate: '45deg'}]}}></View>
-    //     <View style={styles.circle2} /> */}
-    //   </View>
-
-    // </View>
-    //  <MyFashionScrollList/>
-    // <MyPressables
-    //   post={{
-    //     imageUri: postPic,
-    //     userName: 'stefi123',
-    //     description: 'my cute cat <3',
-    //     videoUrl: 'https://www.youtube.com/watch?v=NsUWXo8M7UA',
-    //     titleAlert: 'You clicked the picture',
-    //   }}
-    //   onPress={showAlert}
-    // />
-    // <FlatList
-    //   data = {data}
-    //   renderItem = {renderItem}
-    //   keyExtractor = {(item:PostInterface) => item.userName}
-    //   ListEmptyComponent={
-    //     <View style={styles.empty}>
-    //       <Text>Data is empty</Text>
-    //     </View>}
-    //   ListHeaderComponent={(
-    //     <View style = {styles.header}>
-    //     </View>
-    //   )
-    //   }
-    //   ListFooterComponent={(
-    //     <View style = {styles.footer}>
-    //       <Text>
-    //         Footer
-    //       </Text>
-    //     </View>
-    //   )
-    //   }
-    //   ItemSeparatorComponent={() => (
-    //     <View style={styles.separator}>
-    //     </View>
-    //   )}
-
-    //  />
-    <View style={styles.main2}>
-      <View style={styles.buttonRow}>
-        <MathButton value={-1} onPress={onPressButton}></MathButton>
-        <MathButton value={1} onPress={onPressButton}></MathButton>
-      </View>
-      <View>
-        <Text>{sum}</Text>
-      </View>
-      <View style={styles.buttonRow}>
-        <MathButton value={-2} onPress={onPressButton}></MathButton>
-        <MathButton value={2} onPress={onPressButton}></MathButton>
-      </View>
-      <Pressable style={styles.reset} onPress={reset}>
-        <Text>Reset</Text>
-      </Pressable>
-    </View>
+<LoginForm></LoginForm>
+  
   );
 }
 
