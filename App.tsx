@@ -13,6 +13,8 @@ import {
 import { LoginForm } from './src/components/loginComponents/loginForm';
 import { MovieList } from './src/components/movieListComponents/movieList';
 import { AppNavigator } from './src/navigation/navigators/app-navigator';
+import { BottomTabs } from './src/navigation/navigators/tab-navigator';
+import { TopTabs } from './src/navigation/navigators/top-tabs-nav';
 
 
 const App = () => {

@@ -5,6 +5,8 @@ import {Pressable, Text, View} from 'react-native';
 import {MyLoginScreen} from '../../screens/login';
 import {MyMovieListScreen} from '../../screens/home';
 import {AppRouteProps, AppRoutes} from '../routes/app-routes';
+import {HomeIcon} from '../../assets/icons';
+import {BottomTabs} from './tab-navigator';
 
 const Stack = createStackNavigator<AppRouteProps>();
 export const AppNavigator = () => {
@@ -14,7 +16,7 @@ export const AppNavigator = () => {
       screenOptions={{headerStyle: {backgroundColor: '#957DAD'}}}>
       <Stack.Screen
         name={AppRoutes.Login}
-        component={MyLoginScreen}
+        component={BottomTabs}
         // options={{
         //   title: 'Welcome', //aproape niciodatad
         //   headerTitle: () => <Text> WELCOME </Text>,
@@ -31,21 +33,25 @@ export const AppNavigator = () => {
         // }}
         options={({navigation, route}) => ({
           title: 'Welcome',
-          headerTransparent: true,
+          // headerShown: false,
+          // headerTransparent: true,
           headerRight: () => (
-            <Pressable
-              style={{
-                borderRadius: 20,
-                width: 40,
-                height: 40,
-                backgroundColor: 'pink',
-              }}
-              onPress={
-                () => navigation.navigate('Home', {title: 'test'}) // sau push(nume screen)
-              }></Pressable>
+            // <Pressable
+            // style={{alignItems:'center', justifyContent:'center', backgroundColor:'pink'}}
+            //   onPress={
+            //     () => navigation.navigate('Home', {title: 'test'}) // sau push(nume screen)
+            //   }>
+            <HomeIcon
+              style={{marginRight: 10}}
+              width={20}
+              height={20}
+              onPress={() => navigation.navigate('Home', {title: 'test'})}
+            />
+            // </Pressable>
           ),
         })}
       />
+
       <Stack.Screen
         name={AppRoutes.Home}
         component={MyMovieListScreen}
