@@ -12,6 +12,7 @@ import {useState} from 'react';
 interface Props {
   data: MovieCardIf;
   onPress: (isLikePressed: boolean) => void;
+  onPosterPress: (data:MovieCardIf) => void;
 }
 
 export const MovieListItem = (props: Props) => {
@@ -25,16 +26,21 @@ export const MovieListItem = (props: Props) => {
     props.onPress(isLikePressed);
   };
 
+
   const onPressDescription = () => {
     setIsDescriptionPressed(!isDescriptionPressed);
   };
 
+  const onPosterPressWrapper = () => {
+    props.onPosterPress(props.data);
+  }
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.card}>
-        <View style={styles.posterContainer}>
+        <Pressable style={styles.posterContainer} onPress={onPosterPressWrapper}>
           <Image source={props.data.image} style={styles.moviePic}></Image>
-        </View>
+        </Pressable>
 
         <View style={styles.descriptionContainer}>
           <View style={styles.descriptionTitle}>
@@ -78,21 +84,21 @@ const styles = StyleSheet.create({
   card: {
     width: 280,
     paddingBottom: 10,
-    backgroundColor: '#FDE2BB',
+    backgroundColor: 'white',
     borderRadius: 40,
     justifyContent: 'flex-start',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 3,
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
+    shadowOpacity: 0.42,
+    shadowRadius: 5.22,
+    elevation: 8,
   },
   descriptionContainer: {
     flex: 1,
-    backgroundColor: '#FDE2BB',
+    backgroundColor: 'white',
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
   },
@@ -100,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 3,
     height: 295,
     borderRadius: 40,
-    backgroundColor: '#F9CBA5',
+    backgroundColor: '#db0000',
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginBottom: 5,
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#FEF2E6',
+    backgroundColor: '#F5F5F5',
     alignItems: 'center',
     justifyContent: 'center',
   },

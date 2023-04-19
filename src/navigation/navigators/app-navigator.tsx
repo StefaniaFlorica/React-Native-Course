@@ -18,7 +18,7 @@ export const AppNavigator = () => {
         name={AppRoutes.Login}
         component={BottomTabs}
         // options={{
-        //   title: 'Welcome', //aproape niciodatad
+        //   title: 'Welcome', //aproape niciodata
         //   headerTitle: () => <Text> WELCOME </Text>,
         //   headerLeft: () => (
         //     <View
@@ -52,7 +52,7 @@ export const AppNavigator = () => {
         })}
       />
 
-      <Stack.Screen
+      {/* <Stack.Screen
         name={AppRoutes.Home}
         component={MyMovieListScreen}
         options={({navigation, route}) => ({
@@ -69,7 +69,7 @@ export const AppNavigator = () => {
             </Pressable>
           ),
         })}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

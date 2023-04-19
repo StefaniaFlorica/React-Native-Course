@@ -9,7 +9,12 @@ import {MovieListItem} from './movieListItem';
 import {useState} from 'react';
 import {MovieCardIf} from '../../types/movieCardInterface';
 
-export const MovieList = () => {
+
+interface Props{
+  onCardPress : (data:MovieCardIf) => void
+}
+
+export const MovieList = (props:Props) => {
   const coherence = require('../../assets/images/coherence.png');
   const interstellar = require('../../assets/images/interstellar.png');
   const cloverfield = require('../../assets/images/clover.png');
@@ -50,23 +55,23 @@ export const MovieList = () => {
     
   };
   const renderItem = ({item}: ListRenderItemInfo<MovieCardIf>) => (
-    <MovieListItem data={item} onPress={onLikePress}></MovieListItem>
+    <MovieListItem data={item} onPress={onLikePress} onPosterPress={()=>props.onCardPress(item)}></MovieListItem>
   );
 
   return (
     <FlatList
-      style={{backgroundColor: '#FEF2E6'}}
+      style={{backgroundColor: '#F5F5F5'}}
       data={data}
       renderItem={renderItem}
       keyExtractor={(item: MovieCardIf) => item.title}
-      ListHeaderComponent={
-        <View style={styles.header}>
-          <Text style={styles.title}>{'MY FLIXX'}</Text>
-        </View>
-      }
+      // ListHeaderComponent={
+      //   <View style={styles.header}>
+      //     <Text style={styles.title}>{'MY FLIXX'}</Text>
+      //   </View>
+      // }
       ListFooterComponent={
         <View style={styles.footer}>
-          <Text style={[styles.title, {color: 'black'}]}>{likeNumber}</Text>
+          <Text style={[styles.title, {color: '#db0000'}]}>{likeNumber}</Text>
           <Text style={[styles.title, {fontWeight: 'normal'}]}>
             {' Favorites'}
           </Text>
@@ -78,13 +83,13 @@ export const MovieList = () => {
 };
 
 const styles = StyleSheet.create({
-  title: {fontSize: 20, fontWeight: 'bold', color: 'black',},
+  title: {fontSize: 20, fontWeight: 'bold', color: '#db0000',},
   container: {
     backgroundColor: 'red',
   },
   separator: {
     height: 5,
-    backgroundColor: '#FFC7AD',
+    backgroundColor: '#831010',
     opacity: 0.3,
   },
   header: {
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     height: 50,
-    backgroundColor: '#FFC7AD',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',

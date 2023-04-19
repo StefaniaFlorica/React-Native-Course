@@ -4,26 +4,34 @@
  *
  * @format
  */
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-import { LoginForm } from './src/components/loginComponents/loginForm';
-import { MovieList } from './src/components/movieListComponents/movieList';
-import { AppNavigator } from './src/navigation/navigators/app-navigator';
-import { BottomTabs } from './src/navigation/navigators/tab-navigator';
-import { TopTabs } from './src/navigation/navigators/top-tabs-nav';
-
+import {LoginForm} from './src/components/loginComponents/loginForm';
+import {MovieList} from './src/components/movieListComponents/movieList';
+import {AppNavigator} from './src/navigation/navigators/app-navigator';
+import {BottomTabs} from './src/navigation/navigators/tab-navigator';
+import {TopTabs} from './src/navigation/navigators/top-tabs-nav';
+import {MovieAppNavigator} from './src/navigation/navigators/movie-app-navigator';
+import {MovieDetails} from './src/components/movieListComponents/movieDetails';
 
 const App = () => {
+  const coherence = require('./src/assets/images/coherence.png');
   return (
-  <NavigationContainer>
-    <AppNavigator/>
-  </NavigationContainer>
-  )
-}
+    <NavigationContainer>
+      <MovieAppNavigator/>
+    </NavigationContainer>
+    // <MovieDetails
+    //   data={{
+    //     image: coherence,
+    //     title: 'Coherence',
+    //     description:
+    //       'Strange things begin to happen when a group of friends gather for a dinner party on an evening when a comet is passing overhead.',
+    //   }}
+    // />
+  );
+};
 
 const styles = StyleSheet.create({
   reset: {
