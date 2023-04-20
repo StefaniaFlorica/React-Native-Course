@@ -1,4 +1,7 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import {MovieAppRouteProps, MovieAppRoutes} from '../routes/movie-app-routes';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {BottomTabs} from './tab-navigator';
@@ -35,8 +38,9 @@ export const MovieAppNavigator = () => {
               width={25}
               height={25}
               fill="#DCDCDC"
-              onPress={()=> navigation.navigate(MovieAppRoutes.MovieList)}
-              ></MoviesIcon>
+              onPress={() =>
+                navigation.navigate(MovieAppRoutes.MovieList)
+              }></MoviesIcon>
           ),
         })}
       />
@@ -44,6 +48,7 @@ export const MovieAppNavigator = () => {
         name={MovieAppRoutes.MovieList}
         component={MyMovieListScreen}
         options={({navigation, route}) => ({
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerTitleAlign: 'center',
           headerLeft: () => (
             <BackIcon
@@ -59,6 +64,7 @@ export const MovieAppNavigator = () => {
         name={MovieAppRoutes.MovieDetails}
         component={MyMovieDetailsScreen}
         options={({navigation, route}) => ({
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
           headerLeft: () => (
             <BackIcon
               style={{marginLeft: 25}}

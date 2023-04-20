@@ -19,24 +19,7 @@ export const MovieBottomTabs = () => {
       screenOptions={{
         header: () => <></>,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: 'black',
-          borderRadius: 40,
-          width: '80%',
-          position: 'absolute',
-          marginBottom: 10,
-          marginHorizontal: 35,
-          alignContent: 'center',
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 6,
-          },
-          shadowOpacity: 0.39,
-          shadowRadius: 8.3,
-
-          elevation: 13,
-        },
+        tabBarStyle: styles.customBottomTab,
       }}>
       <Tab.Screen
         name={MovieBottomTabRoutes.Home}
@@ -45,8 +28,8 @@ export const MovieBottomTabs = () => {
           //   header: () => <></>, //ascund header-ul
           tabBarIcon: ({focused}) => (
             <HomeIcon
-              width={25}
-              height={25}
+              width={focused ? 30 : 25}
+              height={focused ? 30 : 25}
               fill={focused ? 'red' : '#DCDCDC'}
               //   onPress={() => setTabColor(1)}
             />
@@ -58,8 +41,8 @@ export const MovieBottomTabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <SearchIcon
-              width={25}
-              height={25}
+              width={focused ? 30 : 25}
+              height={focused ? 30 : 25}
               fill={focused ? 'red' : '#DCDCDC'}
             />
           ),
@@ -70,8 +53,8 @@ export const MovieBottomTabs = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <AccountIcon
-              width={25}
-              height={25}
+              width={focused ? 30 : 25}
+              height={focused ? 30 : 25}
               fill={focused ? 'red' : '#DCDCDC'}
             />
           ),
@@ -79,3 +62,23 @@ export const MovieBottomTabs = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  customBottomTab: {
+    backgroundColor: 'black',
+    borderRadius: 40,
+    width: '80%',
+    position: 'absolute',
+    marginBottom: 10,
+    marginHorizontal: 35,
+    alignContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+    elevation: 13,
+  },
+});
