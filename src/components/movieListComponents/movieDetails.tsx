@@ -1,6 +1,12 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {MovieCardIf} from '../../types/movieCardInterface';
-import {DownloadIcon, PlayIcon} from '../../assets/icons';
+import {
+  DownloadIcon,
+  HeartIcon,
+  PlayIcon,
+  PlusIcon,
+  ShareIcon,
+} from '../../assets/icons';
 
 interface Props {
   data: MovieCardIf;
@@ -24,11 +30,38 @@ export const MovieDetails = (props: Props) => {
         <Text style={styles.downloadText}>Download</Text>
       </Pressable>
       <Text style={styles.description}> {props.data.description}</Text>
+      <View style={styles.iconsContainer}>
+        <View style={styles.icon}>
+          <PlusIcon width={30} height={30} fill="#831010" />
+          <Text style={{fontSize: 10}}>My List</Text>
+        </View>
+        <View style={styles.icon}>
+          <HeartIcon width={30} height={30} fill="#831010" />
+          <Text style={{fontSize: 10}}>Rate</Text>
+        </View>
+        <View style={styles.icon}>
+          <ShareIcon width={30} height={30} fill="#831010" />
+          <Text style={{fontSize: 10}}>Share</Text>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  icon: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '60%',
+    flex: 0.5,
+    marginBottom: 10,
+  },
   posterContainer: {
     flex: 2,
     width: '100%',
@@ -54,14 +87,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 6,
     margin: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+
+    elevation: 14,
   },
 
   description: {
-    flex: 1,
+    flex: 0.5,
     color: '#831010',
     textAlign: 'justify',
     margin: 10,
-    fontSize:16
+    fontSize: 16,
+    // backgroundColor:'pink'
   },
   titleContainer: {
     flex: 0.3,

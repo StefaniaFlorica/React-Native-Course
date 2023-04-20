@@ -13,8 +13,17 @@ export {SearchIcon}
 import BackIcon from './arrow-back-outline.svg'
 export {BackIcon}
 
-import PlayIcon from './arrow-right-outline.svg'
+import PlayIcon from './arrow-right.svg'
 export {PlayIcon}
 
 import DownloadIcon from './download-outline.svg'
 export {DownloadIcon}
+
+import PlusIcon from './plus-outline.svg'
+export {PlusIcon}
+
+import ShareIcon from './share-outline.svg'
+export {ShareIcon}
+
+import HeartIcon from './heart-outline.svg'
+export {HeartIcon}
