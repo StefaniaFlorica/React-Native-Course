@@ -3,6 +3,7 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 interface Props {
   onChangeText: (value: string) => void;
+  email: string;
 }
 
 export const EmailInput = (props: Props) => {
@@ -26,6 +27,7 @@ export const EmailInput = (props: Props) => {
       style={styles.main}>
       <Text style={styles.text}>Email</Text>
       <TextInput
+        value={props.email}
         // placeholder="email"
         // placeholderTextColor="#FFDFD3"
         keyboardType="email-address"

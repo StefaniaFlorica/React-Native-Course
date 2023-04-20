@@ -6,25 +6,36 @@ import {
   View,
 } from 'react-native';
 import {MovieListItem} from './movieListItem';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {MovieCardIf} from '../../types/movieCardInterface';
-import { movieData } from '../../data/movie-app-data';
+import {movieData} from '../../data/movie-app-data';
 
-interface Props{
-  onCardPress : (data:MovieCardIf) => void
+interface Props {
+  onCardPress: (data: MovieCardIf) => void;
 }
 
-export const MovieList = (props:Props) => {
+export const MovieList = (props: Props) => {
   const [likeNumber, setLikeNumber] = useState(0);
+
+  useEffect(() => {
+    console.log('number of likes has changed: ', likeNumber);
+  }, [likeNumber]);
+
+  useEffect(()=>{
+    return () => console.log('\n\nfinal number of likes when leaving the page: ', likeNumber);
+  },[])
+
   const onLikePress = (isLikePressed: boolean) => {
     if (isLikePressed) {
-       return setLikeNumber(likeNumber - 1);
-    } 
-      return setLikeNumber(likeNumber + 1);
-    
+      return setLikeNumber(likeNumber - 1);
+    }
+    return setLikeNumber(likeNumber + 1);
   };
   const renderItem = ({item}: ListRenderItemInfo<MovieCardIf>) => (
-    <MovieListItem data={item} onPress={onLikePress} onPosterPress={()=>props.onCardPress(item)}></MovieListItem>
+    <MovieListItem
+      data={item}
+      onPress={onLikePress}
+      onPosterPress={() => props.onCardPress(item)}></MovieListItem>
   );
 
   return (
@@ -52,7 +63,7 @@ export const MovieList = (props:Props) => {
 };
 
 const styles = StyleSheet.create({
-  title: {fontSize: 20, fontWeight: 'bold', color: '#db0000',},
+  title: {fontSize: 20, fontWeight: 'bold', color: '#db0000'},
   container: {
     backgroundColor: 'red',
   },
@@ -77,7 +88,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.68,
 
     elevation: 5,
-    marginBottom:5
+    marginBottom: 5,
   },
   footer: {
     borderTopLeftRadius: 40,
@@ -96,6 +107,6 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
 
     elevation: 7,
-    marginTop:5
+    marginTop: 5,
   },
 });

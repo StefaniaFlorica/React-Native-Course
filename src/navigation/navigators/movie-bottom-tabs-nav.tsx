@@ -17,7 +17,7 @@ export const MovieBottomTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        header: () => <></>,
+        header: () => null,
         tabBarShowLabel: false,
         tabBarStyle: styles.customBottomTab,
       }}>
@@ -65,11 +65,15 @@ export const MovieBottomTabs = () => {
 
 const styles = StyleSheet.create({
   customBottomTab: {
+    paddingTop:25,
+    justifyContent:'center',
+    alignItems:'center',
+    height:50,
     backgroundColor: 'black',
     borderRadius: 40,
     width: '80%',
     position: 'absolute',
-    marginBottom: 10,
+    marginBottom: 30,
     marginHorizontal: 35,
     alignContent: 'center',
     shadowColor: '#000',

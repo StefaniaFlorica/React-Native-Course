@@ -10,6 +10,9 @@ import {MovieBottomTabs} from './movie-bottom-tabs-nav';
 import {MyMovieListScreen} from '../../screens/home';
 import {BackIcon, HomeIcon, MoviesIcon} from '../../assets/icons';
 import {MyMovieDetailsScreen} from '../../screens/details';
+import { LoginForm } from '../../components/loginComponents/loginForm';
+import { MyLoginScreen } from '../../screens/login';
+import { LoginScreen } from '../../screens/loginScreen';
 
 const Stack = createStackNavigator<MovieAppRouteProps>();
 
@@ -30,7 +33,7 @@ export const MovieAppNavigator = () => {
       })}>
       <Stack.Screen
         name={MovieAppRoutes.Home}
-        component={MovieBottomTabs}
+        component={LoginScreen}
         options={({navigation, route}) => ({
           headerRight: () => (
             <MoviesIcon
@@ -64,7 +67,7 @@ export const MovieAppNavigator = () => {
         name={MovieAppRoutes.MovieDetails}
         component={MyMovieDetailsScreen}
         options={({navigation, route}) => ({
-          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerLeft: () => (
             <BackIcon
               style={{marginLeft: 25}}

@@ -7,12 +7,13 @@ import {
   View,
 } from 'react-native';
 import {MovieCardIf} from '../../types/movieCardInterface';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
+import {HeartFilledIcon, HeartIcon} from '../../assets/icons';
 
 interface Props {
   data: MovieCardIf;
   onPress: (isLikePressed: boolean) => void;
-  onPosterPress: (data:MovieCardIf) => void;
+  onPosterPress: (data: MovieCardIf) => void;
 }
 
 export const MovieListItem = (props: Props) => {
@@ -26,31 +27,42 @@ export const MovieListItem = (props: Props) => {
     props.onPress(isLikePressed);
   };
 
-
   const onPressDescription = () => {
     setIsDescriptionPressed(!isDescriptionPressed);
   };
 
   const onPosterPressWrapper = () => {
     props.onPosterPress(props.data);
-  }
-
+  };
+  const renderTitle = useMemo(
+    () => <Text style={styles.titleText}>{props.data.title}</Text>,
+    [],
+  );
+  const renderPoster = useMemo(
+    () => (
+      <Pressable style={styles.posterContainer} onPress={onPosterPressWrapper}>
+        <Image source={props.data.image} style={styles.moviePic}></Image>
+      </Pressable>
+    ),
+    [],
+  );
   return (
     <View style={styles.mainContainer}>
       <View style={styles.card}>
-        <Pressable style={styles.posterContainer} onPress={onPosterPressWrapper}>
-          <Image source={props.data.image} style={styles.moviePic}></Image>
-        </Pressable>
-
+        {renderPoster}
         <View style={styles.descriptionContainer}>
           <View style={styles.descriptionTitle}>
-            <Pressable onPress={onPressDescription}>
-              <Text style={styles.titleText}>{props.data.title}</Text>
-            </Pressable>
+            <Pressable onPress={onPressDescription}>{renderTitle}</Pressable>
             <Pressable onPress={onPressWrapper}>
-              <Image
+              {/* <Image
                 source={isLikePressed ? heart2 : heart1}
-                style={styles.icon}></Image>
+                style={styles.icon}></Image> */}
+              <HeartFilledIcon
+                height={25}
+                width={25}
+                fill={isLikePressed ? '#db0000' : 'black'}
+                style={{marginRight: 5}}
+              />
             </Pressable>
           </View>
           <View>

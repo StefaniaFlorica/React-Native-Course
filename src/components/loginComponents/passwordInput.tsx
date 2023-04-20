@@ -10,6 +10,8 @@ import {
 
 interface Props {
   onChangeText: (value: string) => void;
+  onSubmitEditing: () => void;
+  password:string
 }
 
 export const PasswordInput = (props: Props) => {
@@ -29,6 +31,8 @@ export const PasswordInput = (props: Props) => {
           },
         ]}>
         <TextInput
+        value={props.password}
+        onSubmitEditing={props.onSubmitEditing}
           //   placeholder="password"
           //   placeholderTextColor="#FFDFD3"
           secureTextEntry={!isVisible}

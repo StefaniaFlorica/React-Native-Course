@@ -27,3 +27,6 @@ export {ShareIcon}
 
 import HeartIcon from './heart-outline.svg'
 export {HeartIcon}
+
+import HeartFilledIcon from './heart-filled.svg'
+export {HeartFilledIcon}
