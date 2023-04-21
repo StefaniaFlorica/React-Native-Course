@@ -9,6 +9,7 @@ import {MovieListItem} from './movieListItem';
 import {useEffect, useState} from 'react';
 import {MovieCardIf} from '../../types/movieCardInterface';
 import {movieData} from '../../data/movie-app-data';
+import { SearchBar } from '../searchBar';
 
 interface Props {
   onCardPress: (data: MovieCardIf) => void;
@@ -44,11 +45,9 @@ export const MovieList = (props: Props) => {
       data={movieData}
       renderItem={renderItem}
       keyExtractor={(item: MovieCardIf) => item.title}
-      // ListHeaderComponent={
-      //   <View style={styles.header}>
-      //     <Text style={styles.title}>{'MY FLIXX'}</Text>
-      //   </View>
-      // }
+      ListHeaderComponent={
+        <SearchBar/>
+      }
       ListFooterComponent={
         <View style={styles.footer}>
           <Text style={[styles.title, {color: '#db0000'}]}>{likeNumber}</Text>

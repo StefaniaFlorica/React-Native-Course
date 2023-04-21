@@ -7,19 +7,31 @@ import {
   PlusIcon,
   ShareIcon,
 } from '../../assets/icons';
+import {DetailsText} from './detailsText';
+import {useRef} from 'react';
+import { DetailsTextRef } from '../../types/detailsTextRef';
 
 interface Props {
   data: MovieCardIf;
 }
 
 export const MovieDetails = (props: Props) => {
+  const onPosterPress = () => {
+    const randomColor = (Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')).toLocaleString();
+    const colorString: string = ("#" + randomColor.toLocaleString())
+    movieDetailsRef.current?.setNewColor(colorString);
+  };
+  const movieDetailsRef = useRef<DetailsTextRef>(null);
+
   return (
     <View style={styles.mainContainer}>
-      <Pressable style={styles.posterContainer}>
+      <Pressable style={styles.posterContainer} onPress = {onPosterPress}>
         <Image source={props.data.image} style={styles.poster}></Image>
       </Pressable>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{props.data.title}</Text>
+      <View style={{flex: 1}}>
+        <DetailsText data={props.data} ref={movieDetailsRef}/>
       </View>
       <Pressable style={styles.playButton}>
         <PlayIcon width={25} height={25} fill="#DCDCDC"></PlayIcon>
@@ -29,7 +41,6 @@ export const MovieDetails = (props: Props) => {
         <DownloadIcon width={25} height={25} fill="#DCDCDC"></DownloadIcon>
         <Text style={styles.downloadText}>Download</Text>
       </Pressable>
-      <Text style={styles.description}> {props.data.description}</Text>
       <View style={styles.iconsContainer}>
         <View style={styles.icon}>
           <PlusIcon width={30} height={30} fill="#831010" />
