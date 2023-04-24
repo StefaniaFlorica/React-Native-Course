@@ -13,6 +13,8 @@ import {MyMovieDetailsScreen} from '../../screens/details';
 import { LoginForm } from '../../components/loginComponents/loginForm';
 import { MyLoginScreen } from '../../screens/login';
 import { LoginScreen } from '../../screens/loginScreen';
+import { FormScreenV1 } from '../../screens/formScreenV1';
+import { MoviesHomeScreen } from '../../screens/movieHome';
 
 const Stack = createStackNavigator<MovieAppRouteProps>();
 
@@ -26,14 +28,15 @@ export const MovieAppNavigator = () => {
         headerTitle: () => (
           <Pressable
             style={styles.headerContainer}
-            onPress={() => navigation.navigate(MovieAppRoutes.MovieList)}>
+            //onPress={() => navigation.navigate(MovieAppRoutes.MovieList)}
+            >
             <Image source={headerLogo} style={styles.logo}></Image>
           </Pressable>
         ),
       })}>
       <Stack.Screen
         name={MovieAppRoutes.Home}
-        component={LoginScreen}
+        component={MoviesHomeScreen}
         options={({navigation, route}) => ({
           headerRight: () => (
             <MoviesIcon

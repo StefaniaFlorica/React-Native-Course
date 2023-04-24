@@ -4,16 +4,22 @@ import {TextInput} from 'react-native-gesture-handler';
 import {useDebounce} from '../hooks/use-debounce.hook';
 import {useNetinfo} from '../hooks/use-netinfo.hook';
 
-export const SearchBar = () => {
+interface Props{
+  onSearchChange: (value:string) => void
+}
+export const SearchBar = (props:Props) => {
   const [searchState, setSearchState] = useState('');
   const searchVal = useDebounce<string>(searchState, 1000);
-  const isConnected = useNetinfo();
+  // const isConnected = useNetinfo();
   useEffect(() => {
     console.log(searchVal);
+    props.onSearchChange(searchVal);
   }, [searchVal]);
-  useEffect(() => {
-    console.log(isConnected);
-  }, [isConnected]);
+  // useEffect(() => {
+  //   console.log(isConnected);
+  // }, [isConnected]);
+
+
   return (
     <View style={{alignItems: 'center', justifyContent: 'center'}}>
       <TextInput style={styles.input} onChangeText={setSearchState}></TextInput>
@@ -23,11 +29,14 @@ export const SearchBar = () => {
 
 const styles = StyleSheet.create({
   input: {
-    padding: 10,
+    marginTop: 10,
+    // padding: 10,
     width: 250,
-    height: 50,
+    height: 40,
     borderRadius: 30,
-    backgroundColor: 'pink',
-    color: '#957DAD',
+    backgroundColor: 'white',
+    color: 'grey',
+    borderWidth: 1,
+    borderColor: 'grey',
   },
 });

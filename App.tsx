@@ -15,6 +15,9 @@ import {BottomTabs} from './src/navigation/navigators/tab-navigator';
 import {TopTabs} from './src/navigation/navigators/top-tabs-nav';
 import {MovieAppNavigator} from './src/navigation/navigators/movie-app-navigator';
 import {MovieDetails} from './src/components/movieListComponents/movieDetails';
+import { FormV1 } from './src/components/formComponents/v1/formV1';
+import { FormScreenV1 } from './src/screens/formScreenV1';
+import { FormScreenV2 } from './src/screens/formScreenV2';
 
 const App = () => {
   const coherence = require('./src/assets/images/coherence.png');
@@ -22,6 +25,7 @@ const App = () => {
     <NavigationContainer>
       <MovieAppNavigator/>
     </NavigationContainer>
+    // <FormScreenV2/>
     // <MovieDetails
     //   data={{
     //     image: coherence,

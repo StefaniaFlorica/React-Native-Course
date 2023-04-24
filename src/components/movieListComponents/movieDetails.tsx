@@ -9,7 +9,7 @@ import {
 } from '../../assets/icons';
 import {DetailsText} from './detailsText';
 import {useRef} from 'react';
-import { DetailsTextRef } from '../../types/detailsTextRef';
+import {DetailsTextRef} from '../../types/detailsTextRef';
 
 interface Props {
   data: MovieCardIf;
@@ -17,21 +17,22 @@ interface Props {
 
 export const MovieDetails = (props: Props) => {
   const onPosterPress = () => {
-    const randomColor = (Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, '0')).toLocaleString();
-    const colorString: string = ("#" + randomColor.toLocaleString())
+    const randomColor = Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')
+      .toLocaleString();
+    const colorString: string = '#' + randomColor.toLocaleString();
     movieDetailsRef.current?.setNewColor(colorString);
   };
   const movieDetailsRef = useRef<DetailsTextRef>(null);
 
   return (
     <View style={styles.mainContainer}>
-      <Pressable style={styles.posterContainer} onPress = {onPosterPress}>
+      <Pressable style={styles.posterContainer} onPress={onPosterPress}>
         <Image source={props.data.image} style={styles.poster}></Image>
       </Pressable>
       <View style={{flex: 1}}>
-        <DetailsText data={props.data} ref={movieDetailsRef}/>
+        <DetailsText data={props.data} ref={movieDetailsRef} />
       </View>
       <Pressable style={styles.playButton}>
         <PlayIcon width={25} height={25} fill="#DCDCDC"></PlayIcon>
