@@ -32,15 +32,16 @@ export const MovieList = (props: Props) => {
   //     );
   // }, []);
 
-  // const filteredMovies: MovieCardIf[] = useSearch(
-  //   movieData,
-  //   searchVal,
-  //   'title',
-  // );
+  const filteredMovies: MovieCardIf[] = useSearch(
+    movieData,
+    searchVal,
+    'title',
+  );
 
+  
   const onSearchChange = (value: string) => {
     setSearchVal(value);
-    console.log('fgfdhgfdg');
+    console.log('search value changed',value);
   };
 
   const onLikePress = (isLikePressed: boolean) => {
@@ -69,7 +70,7 @@ export const MovieList = (props: Props) => {
       data={filteredMovies}
       renderItem={renderItem}
       keyExtractor={(item: MovieCardIf) => item.title}
-      // ListHeaderComponent={<SearchBar onSearchChange={onSearchChange} />}
+      ListHeaderComponent={<SearchBar onSearchChange={onSearchChange} />}
       ListFooterComponent={renderFooter}
       ItemSeparatorComponent={() => <View style={styles.separator}></View>}
     />
