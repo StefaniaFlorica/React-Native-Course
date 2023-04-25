@@ -6,10 +6,11 @@ import {
   View,
 } from 'react-native';
 import {MovieListItem} from './movieListItem';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {MovieCardIf} from '../../types/movieCardInterface';
 import {movieData} from '../../data/movie-app-data';
-import { SearchBar } from '../searchBar';
+import {SearchBar} from '../searchBar';
+import {useSearch} from '../../hooks/use-search.hook';
 
 interface Props {
   onCardPress: (data: MovieCardIf) => void;
@@ -17,14 +18,30 @@ interface Props {
 
 export const MovieList = (props: Props) => {
   const [likeNumber, setLikeNumber] = useState(0);
+  const [searchVal, setSearchVal] = useState('');
 
-  useEffect(() => {
-    console.log('number of likes has changed: ', likeNumber);
-  }, [likeNumber]);
+  // useEffect(() => {
+  //   console.log('number of likes has changed: ', likeNumber);
+  // }, [likeNumber]);
 
-  useEffect(()=>{
-    return () => console.log('\n\nfinal number of likes when leaving the page: ', likeNumber);
-  },[])
+  // useEffect(() => {
+  //   return () =>
+  //     console.log(
+  //       '\n\nfinal number of likes when leaving the page: ',
+  //       likeNumber,
+  //     );
+  // }, []);
+
+  // const filteredMovies: MovieCardIf[] = useSearch(
+  //   movieData,
+  //   searchVal,
+  //   'title',
+  // );
+
+  const onSearchChange = (value: string) => {
+    setSearchVal(value);
+    console.log('fgfdhgfdg');
+  };
 
   const onLikePress = (isLikePressed: boolean) => {
     if (isLikePressed) {
@@ -39,23 +56,21 @@ export const MovieList = (props: Props) => {
       onPosterPress={() => props.onCardPress(item)}></MovieListItem>
   );
 
+  const renderFooter = useMemo(() => (
+    <View style={styles.footer}>
+      <Text style={[styles.title, {color: '#db0000'}]}>{likeNumber}</Text>
+      <Text style={[styles.title, {fontWeight: 'normal'}]}>{' Favorites'}</Text>
+    </View>
+  ),[likeNumber]);
+
   return (
     <FlatList
       style={{backgroundColor: '#F5F5F5'}}
-      data={movieData}
+      data={filteredMovies}
       renderItem={renderItem}
       keyExtractor={(item: MovieCardIf) => item.title}
-      ListHeaderComponent={
-        <SearchBar/>
-      }
-      ListFooterComponent={
-        <View style={styles.footer}>
-          <Text style={[styles.title, {color: '#db0000'}]}>{likeNumber}</Text>
-          <Text style={[styles.title, {fontWeight: 'normal'}]}>
-            {' Favorites'}
-          </Text>
-        </View>
-      }
+      // ListHeaderComponent={<SearchBar onSearchChange={onSearchChange} />}
+      ListFooterComponent={renderFooter}
       ItemSeparatorComponent={() => <View style={styles.separator}></View>}
     />
   );
