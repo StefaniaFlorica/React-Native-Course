@@ -15,6 +15,7 @@ import { MyLoginScreen } from '../../screens/login';
 import { LoginScreen } from '../../screens/loginScreen';
 import { FormScreenV1 } from '../../screens/formScreenV1';
 import { MoviesHomeScreen } from '../../screens/movieHome';
+import { FormScreenV2 } from '../../screens/formScreenV2';
 
 const Stack = createStackNavigator<MovieAppRouteProps>();
 
@@ -36,7 +37,7 @@ export const MovieAppNavigator = () => {
       })}>
       <Stack.Screen
         name={MovieAppRoutes.Home}
-        component={MoviesHomeScreen}
+        component={FormScreenV2}
         options={({navigation, route}) => ({
           headerRight: () => (
             <MoviesIcon

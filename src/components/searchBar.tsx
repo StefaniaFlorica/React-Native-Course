@@ -31,7 +31,7 @@ export const SearchBar = (props: Props) => {
 const styles = StyleSheet.create({
   input: {
     marginTop: 10,
-    // padding: 10,
+    padding: 10,
     width: 250,
     height: 40,
     borderRadius: 30,

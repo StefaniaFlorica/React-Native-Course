@@ -25,7 +25,7 @@ const App = () => {
     <NavigationContainer>
       <MovieAppNavigator/>
     </NavigationContainer>
-    // <FormScreenV2/>
+    // <FormScreenV1/>
     // <MovieDetails
     //   data={{
     //     image: coherence,

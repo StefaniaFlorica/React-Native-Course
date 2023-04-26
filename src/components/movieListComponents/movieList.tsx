@@ -38,7 +38,7 @@ export const MovieList = (props: Props) => {
     'title',
   );
 
-  
+  //console.debug({movieData, searchVal})
   const onSearchChange = (value: string) => {
     setSearchVal(value);
     console.log('search value changed',value);
@@ -67,7 +67,7 @@ export const MovieList = (props: Props) => {
   return (
     <FlatList
       style={{backgroundColor: '#F5F5F5'}}
-      data={filteredMovies}
+      data={(searchVal!==""?filteredMovies:movieData)}
       renderItem={renderItem}
       keyExtractor={(item: MovieCardIf) => item.title}
       ListHeaderComponent={<SearchBar onSearchChange={onSearchChange} />}
