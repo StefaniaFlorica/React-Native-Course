@@ -8,14 +8,19 @@ import {
   ShareIcon,
 } from '../../assets/icons';
 import {DetailsText} from './detailsText';
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {DetailsTextRef} from '../../types/detailsTextRef';
+import { MMKV } from 'react-native-mmkv';
 
 interface Props {
-  data: MovieCardIf;
+  data: MovieCardIf | null;
 }
 
 export const MovieDetails = (props: Props) => {
+
+  const storage = new MMKV();
+
+
   const onPosterPress = () => {
     const randomColor = Math.floor(Math.random() * 16777215)
       .toString(16)
@@ -29,12 +34,12 @@ export const MovieDetails = (props: Props) => {
   return (
     <View style={styles.mainContainer}>
       <Pressable style={styles.posterContainer} onPress={onPosterPress}>
-        <Image source={props.data.image} style={styles.poster}></Image>
+        {props.data?.image && <Image source={props.data?.image} style={styles.poster}></Image>}
       </Pressable>
       <View style={{flex: 1}}>
-        <DetailsText data={props.data} ref={movieDetailsRef} />
+        {props.data && <DetailsText data={props.data} ref={movieDetailsRef} />}
       </View>
-      <Pressable style={styles.playButton}>
+      <Pressable style={styles?.playButton}>
         <PlayIcon width={25} height={25} fill="#DCDCDC"></PlayIcon>
         <Text style={styles.playText}>Play</Text>
       </Pressable>

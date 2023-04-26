@@ -11,14 +11,21 @@ import {MovieCardIf} from '../../types/movieCardInterface';
 import {movieData} from '../../data/movie-app-data';
 import {SearchBar} from '../searchBar';
 import {useSearch} from '../../hooks/use-search.hook';
+import {MovieState, useMovieStore} from '../../store/useMovieStore';
+import {MMKV} from 'react-native-mmkv';
 
 interface Props {
+  data: MovieCardIf[];
   onCardPress: (data: MovieCardIf) => void;
 }
 
 export const MovieList = (props: Props) => {
   const [likeNumber, setLikeNumber] = useState(0);
   const [searchVal, setSearchVal] = useState('');
+  const storage = new MMKV();
+  useEffect(() => {
+    storage.set('key', 'din lista');
+  });
 
   // useEffect(() => {
   //   console.log('number of likes has changed: ', likeNumber);
@@ -41,7 +48,7 @@ export const MovieList = (props: Props) => {
   //console.debug({movieData, searchVal})
   const onSearchChange = (value: string) => {
     setSearchVal(value);
-    console.log('search value changed',value);
+    console.log('search value changed', value);
   };
 
   const onLikePress = (isLikePressed: boolean) => {
@@ -54,20 +61,25 @@ export const MovieList = (props: Props) => {
     <MovieListItem
       data={item}
       onPress={onLikePress}
-      onPosterPress={() => props.onCardPress(item)}></MovieListItem>
+      onPosterPress={props.onCardPress}></MovieListItem>
   );
 
-  const renderFooter = useMemo(() => (
-    <View style={styles.footer}>
-      <Text style={[styles.title, {color: '#db0000'}]}>{likeNumber}</Text>
-      <Text style={[styles.title, {fontWeight: 'normal'}]}>{' Favorites'}</Text>
-    </View>
-  ),[likeNumber]);
+  const renderFooter = useMemo(
+    () => (
+      <View style={styles.footer}>
+        <Text style={[styles.title, {color: '#db0000'}]}>{likeNumber}</Text>
+        <Text style={[styles.title, {fontWeight: 'normal'}]}>
+          {' Favorites'}
+        </Text>
+      </View>
+    ),
+    [likeNumber],
+  );
 
   return (
     <FlatList
       style={{backgroundColor: '#F5F5F5'}}
-      data={(searchVal!==""?filteredMovies:movieData)}
+      data={props.data}
       renderItem={renderItem}
       keyExtractor={(item: MovieCardIf) => item.title}
       ListHeaderComponent={<SearchBar onSearchChange={onSearchChange} />}

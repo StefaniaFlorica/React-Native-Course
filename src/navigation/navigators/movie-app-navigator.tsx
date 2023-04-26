@@ -37,7 +37,7 @@ export const MovieAppNavigator = () => {
       })}>
       <Stack.Screen
         name={MovieAppRoutes.Home}
-        component={FormScreenV2}
+        component={MoviesHomeScreen}
         options={({navigation, route}) => ({
           headerRight: () => (
             <MoviesIcon

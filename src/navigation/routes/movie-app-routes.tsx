@@ -9,5 +9,5 @@ export enum MovieAppRoutes {
 export type MovieAppRouteProps = {
   [MovieAppRoutes.Home]: undefined;
   [MovieAppRoutes.MovieList]: undefined;
-  [MovieAppRoutes.MovieDetails]: MovieCardIf;
+  [MovieAppRoutes.MovieDetails]: undefined;
 };

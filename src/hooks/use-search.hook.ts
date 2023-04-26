@@ -7,7 +7,7 @@ export const useSearch = <T>(arr: T[], searchValue: string, key: keyof T) => {
   useEffect(() => {
     // if (searchValueRef.current !== searchValue) {
       const filtered = arr.filter((item) =>
-        item[key] === searchValue)
+        (item[key] as string).includes(searchValue))
       setFilteredElements(filtered);
       // searchValueRef.current = searchValue;
     // }
