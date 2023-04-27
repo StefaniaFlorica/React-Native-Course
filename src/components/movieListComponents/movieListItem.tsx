@@ -35,13 +35,13 @@ export const MovieListItem = (props: Props) => {
     props.onPosterPress(props.data);
   };
   const renderTitle = useMemo(
-    () => <Text style={styles.titleText}>{props.data.title}</Text>,
+    () => <Text style={styles.titleText}>{props.data.name}</Text>,
     [],
   );
   const renderPoster = useMemo(
     () => (
       <Pressable style={styles.posterContainer} onPress={onPosterPressWrapper}>
-        <Image source={props.data.image} style={styles.moviePic}></Image>
+        <Image source={{uri:props.data.image}} style={styles.moviePic}></Image>
       </Pressable>
     ),
     [],

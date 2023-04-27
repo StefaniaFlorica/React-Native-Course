@@ -8,19 +8,22 @@ export interface MovieState {
   movies: MovieCardIf[];
   movie: MovieCardIf | null;
   setCurrentMovie: (movie: MovieCardIf) => void;
+  getMovies: (data: MovieCardIf[]) => void;
 }
 
-export const useMovieStore = create(
-  persist<MovieState>(
+export const useMovieStore = create<MovieState>(
+  // persist<MovieState>(
     set => ({
-      movies: movieData,
+      movies: [],
       movie: null,
       setCurrentMovie: (selectedMovie: MovieCardIf) =>
         set((state: MovieState) => ({movie: selectedMovie})),
+      getMovies: (data: MovieCardIf[]) =>
+        set((state: MovieState) => ({movies: data})),
     }),
-    {
-      name: 'movie-storage',
-      storage: createJSONStorage(() => zustandStorage),
-    },
-  ),
+    // {
+      // name: 'movie-storage',
+  //     storage: createJSONStorage(() => zustandStorage),
+  //   },
+  // ),
 );
