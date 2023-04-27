@@ -1,5 +1,6 @@
 export interface MovieCardIf{
-    image: number,
-    title: string,
+    id:number,
+    image: string,
+    name: string,
     description: string,
 }

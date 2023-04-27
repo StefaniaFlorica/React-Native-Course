@@ -18,7 +18,7 @@ export const DetailsText = forwardRef((props: Props, ref:ForwardedRef<DetailsTex
     <View>
       <View style={styles.titleContainer}>
         <Text style={[styles.title, {color: textColor}]}>
-          {props.data.title}
+          {props.data.name}
         </Text>
       </View>
       <Text style={[styles.description, {color: textColor}]}>

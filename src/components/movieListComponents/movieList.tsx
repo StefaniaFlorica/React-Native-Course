@@ -1,6 +1,8 @@
 import {
+  ActivityIndicator,
   FlatList,
   ListRenderItemInfo,
+  LogBox,
   StyleSheet,
   Text,
   View,
@@ -17,6 +19,11 @@ import {MMKV} from 'react-native-mmkv';
 interface Props {
   data: MovieCardIf[];
   onCardPress: (data: MovieCardIf) => void;
+  refreshing: boolean;
+  loading: boolean;
+  loadingMore: boolean;
+  onEndReachedFlatlist: () => void;
+  onRefreshFlatList: () => void;
 }
 
 export const MovieList = (props: Props) => {
@@ -39,11 +46,11 @@ export const MovieList = (props: Props) => {
   //     );
   // }, []);
 
-  const filteredMovies: MovieCardIf[] = useSearch(
-    movieData,
-    searchVal,
-    'title',
-  );
+  // const filteredMovies: MovieCardIf[] = useSearch(
+  //   movieData,
+  //   searchVal,
+  //   'name',
+  // );
 
   //console.debug({movieData, searchVal})
   const onSearchChange = (value: string) => {
@@ -76,20 +83,53 @@ export const MovieList = (props: Props) => {
     [likeNumber],
   );
 
+  LogBox.ignoreAllLogs();
+
   return (
-    <FlatList
-      style={{backgroundColor: '#F5F5F5'}}
-      data={props.data}
-      renderItem={renderItem}
-      keyExtractor={(item: MovieCardIf) => item.title}
-      ListHeaderComponent={<SearchBar onSearchChange={onSearchChange} />}
-      ListFooterComponent={renderFooter}
-      ItemSeparatorComponent={() => <View style={styles.separator}></View>}
-    />
+    <View style={{flex: 1}}>
+      <SearchBar onSearchChange={onSearchChange} />
+      <FlatList
+        style={{backgroundColor: '#F5F5F5'}}
+        contentContainerStyle={
+          !props.data?.length
+            ? {flex: 1, justifyContent: 'center', alignItems: 'center'}
+            : {}
+        }
+        data={props.data}
+        renderItem={renderItem}
+        onEndReached={props.onEndReachedFlatlist}
+        onEndReachedThreshold={0.5}
+        refreshing={props.refreshing}
+        onRefresh={props.onRefreshFlatList}
+        keyExtractor={(item: MovieCardIf, index) => index.toLocaleString()}
+        ListEmptyComponent={
+          props.loading ? (
+            <View style={styles.listLoading}>
+              <ActivityIndicator />
+            </View>
+          ) : (
+            <View
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Text>No data</Text>
+            </View>
+          )
+        }
+        ListFooterComponent={
+          props.loadingMore ? <ActivityIndicator /> : <View />
+        }
+        ItemSeparatorComponent={() => <View style={styles.separator}></View>}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  listLoading: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   title: {fontSize: 20, fontWeight: 'bold', color: '#db0000'},
   container: {
     backgroundColor: 'red',

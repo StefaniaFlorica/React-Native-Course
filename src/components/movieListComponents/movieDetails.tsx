@@ -34,7 +34,7 @@ export const MovieDetails = (props: Props) => {
   return (
     <View style={styles.mainContainer}>
       <Pressable style={styles.posterContainer} onPress={onPosterPress}>
-        {props.data?.image && <Image source={props.data?.image} style={styles.poster}></Image>}
+        {props.data?.image && <Image source={{uri:props.data?.image}} style={styles.poster}></Image>}
       </Pressable>
       <View style={{flex: 1}}>
         {props.data && <DetailsText data={props.data} ref={movieDetailsRef} />}
